@@ -20,6 +20,12 @@ class Backmodel extends CI_Model {
           $this->db->join('course_kategori', 'course_product.kategori_fk = course_kategori.kategori_id');           
           return $this->db->get('course_product')->result();       
      }
+
+     public function addTransaction($data=array()){
+
+          $this->db->insert("course_transaction",$data);
+
+     }
 }
 
 /* End of file ModelName.php */
