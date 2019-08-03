@@ -26,6 +26,19 @@ class Backmodel extends CI_Model {
           $this->db->insert("course_transaction",$data);
 
      }
+
+     public function modelLogin($email ="", $password = ""){
+          
+          $this->db->where("user_email", $email); 
+          $this->db->where("user_password", $password); 
+          
+          
+          return $this->db->get("courseapi_user")->row();
+
+           
+           
+
+     }
 }
 
 /* End of file ModelName.php */
