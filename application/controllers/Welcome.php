@@ -79,6 +79,35 @@ class Welcome extends REST_Controller {
 
 	}
 
+	public function login_post(){
+		
+		$message = array();
+
+		$cekDB = $this->backmodel->modelLogin($this->input->post("email"),$this->input->post("password"));
+
+		if($cekDB !=null){
+
+				$message = array(
+					"message" => "success",
+					"data" => $cekDB
+				);
+
+				$this->set_response($message, REST_Controller::HTTP_OK);
+
+		}
+		else{
+
+				$message = array(
+					"message" => "failed",					
+				);
+
+				$this->set_response($message, REST_Controller::HTTP_NOT_FOUND);
+
+
+		}
+
+	}
+
 	 
 	
 }
