@@ -30,14 +30,29 @@ class Backmodel extends CI_Model {
      public function modelLogin($email ="", $password = ""){
           
           $this->db->where("user_email", $email); 
-          $this->db->where("user_password", $password); 
-          
+          $this->db->where("user_password", $password);         
           
           return $this->db->get("courseapi_user")->row();
 
-           
-           
+                     
 
+     }
+
+     public function modelTransaction($data=array()){
+
+          $this->db->insert("course_transaction", $data);
+          
+     }
+
+     public function modelShowTransactionbyUser($idUser){
+   
+          $this->db->join('course_product', 'course_product.product_id = course_transaction.product_fk');          
+          $this->db->join('course_kategori', 'course_kategori.kategori_id = course_product.kategori_fk');           
+          $this->db->join('courseapi_user', 'courseapi_user.user_id = course_transaction.user_fk');          
+                
+          $this->db->where('course_transaction.user_fk', $idUser);           
+          return $this->db->get('course_transaction')->result();       
+         
      }
 }
 

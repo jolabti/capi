@@ -108,6 +108,82 @@ class Welcome extends REST_Controller {
 
 	}
 
+	public function order_post(){
+			$message = array();
+			$data = array(				
+				 
+				"product_fk" => $this->input->post("trx_productfk"), 
+				"user_fk" => $this->input->post("trx_userfk"), 
+				"transaction_qty" => $this->input->post("trx_qty"), 
+				"transaction_date" => date("Y-m-d"), 
+				"transaction_amount" => $this->input->post("trx_amount"), 
+			);
+
+
+			$message = array(
+				"status" => "sucess"
+			);
+			
+			$this->db->trans_start();
+
+			$this->backmodel->modelTransaction($data);
+	
+			$this->db->trans_complete();
+
+				if ($this->db->trans_status() === FALSE) {
+			
+					$this->db->trans_rollback();
+
+					$message = array(
+						"message" => "failed to request product"				
+					); 
+					
+				} 
+				else
+				{
+					$message = array(
+						"message" => "success"				
+					); 
+					
+					$this->db->trans_commit();
+				}
+
+			
+			$this->set_response($message, REST_Controller::HTTP_OK);
+
+
+
+	}
+
+
+	public function shoplist_get($idUser){
+		
+		$data = $this->backmodel->modelShowTransactionbyUser($idUser);
+
+		$message = array(
+			 
+		);
+
+		if($data!=null){
+
+				$message = array(
+					"status" => "success",
+					"data" => $data
+				);
+
+		}
+
+		else{
+			$message = array(
+				"status" => "failed",
+				"data" => ""
+			);
+
+		}
+		$this->set_response($message, REST_Controller::HTTP_OK);
+		 
+	}
+
 	 
 	
 }
