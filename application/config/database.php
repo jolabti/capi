@@ -75,9 +75,8 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	//'hostname' => 'localhost',
-	'hostname' => 'http://johannainggolan.site',
-	'username' => 'johannai_user',
+	'hostname' => 'localhost',
+ 	'username' => 'johannai_user',
 	'password' => 'b6841ezabajaj220',
 	'database' => 'johannai_courseapi',
 	'dbdriver' => 'mysqli',
