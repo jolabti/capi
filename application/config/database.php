@@ -75,7 +75,8 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	//'hostname' => 'localhost',
+	'hostname' => 'https://sylveon.rapidplex.com',
 	'username' => 'johannai_user',
 	'password' => 'b6841ezabajaj220',
 	'database' => 'johannai_courseapi',
